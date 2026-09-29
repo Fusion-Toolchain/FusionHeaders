@@ -18,7 +18,7 @@
 
 #ifndef FUSION_PUBLIC_TRACE_TREE_H
 #define FUSION_PUBLIC_TRACE_TREE_H
-#include <Fusion/FusionTypes.h>
+#include "FusionTypes.h"
 #include <stdint.h>
 
 typedef struct FusTraceTree_T* FusTraceTree;
