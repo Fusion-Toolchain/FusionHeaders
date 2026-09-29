@@ -20,7 +20,7 @@
 #ifndef FUSION_PUBLIC_RULE_H
 #define FUSION_PUBLIC_RULE_H
 #include "Backend/FusionBackend.h"
-#include "Fusion/IRTypes/HidrHelper.h"
+#include "IRTypes/HidrHelper.h"
 #include "IRTypes/HidrType.h"
 #include "FusionTypes.h"
 
