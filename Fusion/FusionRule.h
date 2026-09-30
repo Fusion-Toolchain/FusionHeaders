@@ -22,6 +22,7 @@
 #include "Backend/FusionBackend.h"
 #include "IRTypes/HidrHelper.h"
 #include "IRTypes/HidrType.h"
+#include "FusionBuffer.h"
 #include "FusionTypes.h"
 
 #include <stddef.h>
@@ -41,7 +42,7 @@ typedef struct {
     FusCommandRuleType_t sType;
     const FusCommandRuleBase_t* pNext;
 
-    FusBufferContext_t* buffer;
+    FusBufferController buffer;
 } FusCommandBuffer;
 typedef struct {
     FusCommandRuleType_t sType;

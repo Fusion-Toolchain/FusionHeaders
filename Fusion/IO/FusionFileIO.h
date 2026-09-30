@@ -20,5 +20,5 @@
 #include <Fusion/FusionTypes.h>
 #include "FusionGenericIO.h"
 
-FUS_API FusStatusFlag_t fusIOFileSink(FusIOSink* out,const char* path);
+FusStatusFlag_t fusIOFileSink(FusIOSink* out,const char* path);
 #endif

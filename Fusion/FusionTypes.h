@@ -21,10 +21,21 @@
 #define FUSION_CORE_TYPES_H
 #include <stddef.h>
 
-#ifdef _WIN32
-#define FUS_API __declspec(dllexport)
+#if defined(FUSION_BUILD_SHARED)
+    #ifdef _WIN32
+        #define FUS_API __declspec(dllexport)
+    #else
+        #define FUS_API __attribute__((visibility("default")))
+    #endif
+#elif defined(FUSION_USE_SHARED)
+    #ifdef _WIN32
+        #define FUS_API __declspec(dllimport)
+    #else
+        #define FUS_API
+    #endif
 #else
-#define FUS_API __attribute__((visibility("default")))
+    // build estático
+    #define FUS_API
 #endif
 
 #define FUS_DEFINE_HANDLE(object) typedef struct object##_T* object;
@@ -47,9 +58,8 @@ typedef struct {
 typedef struct FusInstance_T* FusInstance;
 
 typedef struct {
-    unsigned char* buffer;
-    size_t buffer_size;
-    size_t offset;
-} FusBufferContext_t;
+    void* data;
+    size_t size, offset;
+} FusBufferController;
 
 #endif

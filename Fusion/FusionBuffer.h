@@ -21,18 +21,27 @@
 #include "FusionTypes.h"
 #include "IO/FusionGenericIO.h"
 
+typedef struct {
+    void* userdata;
+    void* (*alloc)(void* userdata, size_t size);
+    void  (*free)(void* userdata, void* ptr, size_t size);
+} FusExecMemAllocator;
+typedef struct FusBufferExecutable_T* FusBufferExecutable;
+
 /*
  * @breif Create Buffer
+ * @param FusBufferExecutable* out
  * @param size_t Buffer Size
  * @return FusBufferContext_t* Buffer Access
 */
-FusBufferContext_t* fusCreateBufferCode(FusInstance instance, size_t buffer_size);
-FusStatusFlag_t fusExecutableBuffer(FusBufferContext_t* buffer);
-FusStatusFlag_t fusBufferIOSink(FusBufferContext_t* buffer, FusIOSink sink);
-void fusReUsedBuffer(FusBufferContext_t* buffer);
+FusStatusFlag_t fusCreateBufferExecutable(FusInstance instance, FusBufferExecutable* out, size_t buffer_size, FusExecMemAllocator* allocator);
+FusStatusFlag_t fusMakeExecutable(FusBufferExecutable buffer);
+FusStatusFlag_t fusGetExecutableController(FusBufferExecutable buffer, FusBufferController* controller);
+
+FusStatusFlag_t fusBufferIOSink(FusBufferController* buffer, FusIOSink sink);
+void fusReUsedBuffer(FusBufferExecutable buffer);
 /*
  * @brief Destroy Buffer Access
 */
-void fusDestroyBufferCode(FusInstance instance, FusBufferContext_t* buffer);
-
+void fusDestroyBufferExecutable(FusInstance instance, FusBufferExecutable buffer);
 #endif
